@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="shell,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="#Linux shell编程基础 ( 二 ) 标签: linux shell  echo命令 12345 echo [Options] [String]  -n	#不换行输出-e	#启用反斜线转义解释 （例:echo -e &quot;\033[32m-\033[0m&quot; 打印颜色)-E	#禁用反斜线转义解释（默认）  read命令 123-p	#命令行指定提示符-t	#等待输入的秒数-s	#隐藏方式读取">
+<meta name="keywords" content="shell">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux Shell 编程基础 ( 二 )">
+<meta property="og:url" content="http://yoursite.com/2019/09/24/shell编程( 二 )/index.html">
+<meta property="og:site_name" content="APP">
+<meta property="og:description" content="#Linux shell编程基础 ( 二 ) 标签: linux shell  echo命令 12345 echo [Options] [String]  -n	#不换行输出-e	#启用反斜线转义解释 （例:echo -e &quot;\033[32m-\033[0m&quot; 打印颜色)-E	#禁用反斜线转义解释（默认）  read命令 123-p	#命令行指定提示符-t	#等待输入的秒数-s	#隐藏方式读取">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-04-09T02:34:42.100Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux Shell 编程基础 ( 二 )">
+<meta name="twitter:description" content="#Linux shell编程基础 ( 二 ) 标签: linux shell  echo命令 12345 echo [Options] [String]  -n	#不换行输出-e	#启用反斜线转义解释 （例:echo -e &quot;\033[32m-\033[0m&quot; 打印颜色)-E	#禁用反斜线转义解释（默认）  read命令 123-p	#命令行指定提示符-t	#等待输入的秒数-s	#隐藏方式读取">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/09/24/shell编程( 二 )/">
+
+
+
+
+
+  <title>Linux Shell 编程基础 ( 二 ) | APP</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">APP</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">剑未佩妥出门已是江湖，千帆过尽归来仍是少年</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/24/shell编程( 二 )/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="APP">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="APP">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Linux Shell 编程基础 ( 二 )</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-24T00:44:37+08:00">
+                2019-09-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/shell/" itemprop="url" rel="index">
+                    <span itemprop="name">shell</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>#Linux shell编程基础 ( 二 )</p>
+<p>标签: linux shell</p>
+<hr>
+<p><strong>echo命令</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> <span class="built_in">echo</span> [Options] [String] </span><br><span class="line"> </span><br><span class="line">-n	<span class="comment">#不换行输出</span></span><br><span class="line">-e	<span class="comment">#启用反斜线转义解释 （例:echo -e "\033[32m-\033[0m" 打印颜色)</span></span><br><span class="line">-E	<span class="comment">#禁用反斜线转义解释（默认）</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>read命令</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-p	<span class="comment">#命令行指定提示符</span></span><br><span class="line">-t	<span class="comment">#等待输入的秒数</span></span><br><span class="line">-s	<span class="comment">#隐藏方式读取</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>cat命令</strong></p>
+<a id="more"></a>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-n	<span class="comment">#显示文件的内容和行号</span></span><br><span class="line">-b	<span class="comment">#只标识非空白行的行号（空白行仍显示）</span></span><br><span class="line">-e	<span class="comment">#在每一行的末尾显示“$”字符，在需要将多行内容转换成一行时非常有用</span></span><br><span class="line">-s	<span class="comment">#替换两行以上空白行为一行(例:cat -s test | tr -s '\n' 移除空白行)</span></span><br><span class="line"></span><br><span class="line">例:cat &gt;&gt; 目录 &lt;&lt;EOF </span><br><span class="line">内容</span><br><span class="line">EOF	<span class="comment">#多行追加</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>tail命令</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">tail:从指定点开始将文件写到标准输出</span><br><span class="line">-b number	<span class="comment">#从Number变量表示的512字节块位置开始读取指定文件</span></span><br><span class="line">-c number	<span class="comment">#从Number变量表示的字节位置开始读取指定文件</span></span><br><span class="line">-n Number	<span class="comment">#从Number变量表示的行位置开始读取指定文件</span></span><br><span class="line">-r			<span class="comment">#逆序打印</span></span><br><span class="line"></span><br><span class="line">例:</span><br><span class="line">tail -n 20 notes	<span class="comment">#指定从 notes 文件末尾开始读取的行数</span></span><br><span class="line">tail -c +200 notes | pg	<span class="comment">#从第 200 字节开始，每次显示一页 notes 文件</span></span><br><span class="line">tail -f accounts	<span class="comment">#跟踪文件的增长</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>grep命令</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">grep:文本中查找字符串</span><br><span class="line">-c	<span class="comment">#只输出匹配行的计数。</span></span><br><span class="line">-i	<span class="comment">#不区分大小写（只适用于单字符）。</span></span><br><span class="line">-h	<span class="comment">#查询多文件时不显示文件名。</span></span><br><span class="line">-l	<span class="comment">#查询多文件时只输出包含匹配字符的文件名。</span></span><br><span class="line">-n	<span class="comment">#显示匹配行及行号。</span></span><br><span class="line">-s	<span class="comment">#不显示不存在或无匹配文本的错误信息。</span></span><br><span class="line">-v	<span class="comment">#显示不包含匹配文本的所有行。</span></span><br><span class="line">-E	<span class="comment">#扩展的egrep:用于在文件内查找指定的字符串</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>sed命令</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">命令与选项:</span><br><span class="line">a\	<span class="comment">#在当前行后添加一行或多行</span></span><br><span class="line">c\	<span class="comment">#用新文本替换当前行中的文本</span></span><br><span class="line">d	<span class="comment">#删除行</span></span><br><span class="line">i\	<span class="comment">#在当前行之前插入文本</span></span><br><span class="line">h	<span class="comment">#把模式空间的内容复制到暂存缓冲区</span></span><br><span class="line">H	<span class="comment">#把模式空间的内容添加到缓冲区</span></span><br><span class="line">g	<span class="comment">#取出暂存缓冲区的内容，将其复制到模式缓冲区</span></span><br><span class="line">G	<span class="comment">#取出暂存缓冲区的内容，将其追加到模式缓冲区</span></span><br><span class="line">l	<span class="comment">#列出非打印字符</span></span><br><span class="line">p	<span class="comment">#打印行</span></span><br><span class="line">n	<span class="comment">#读入下一行输入，并从下一条而不是第一条命令对其处理</span></span><br><span class="line">q	<span class="comment">#结束或退出sed</span></span><br><span class="line">r	<span class="comment">#从文件中读取输入行</span></span><br><span class="line">!	<span class="comment">#对所选行以外的行应用所有命令</span></span><br><span class="line">s	<span class="comment">#用一个字符串替换另外一个字符串</span></span><br><span class="line">替换标志:</span><br><span class="line">g	<span class="comment">#在行内进行全局替换</span></span><br><span class="line">p	<span class="comment">#打印行</span></span><br><span class="line">w	<span class="comment">#将行写入文件</span></span><br><span class="line">x	<span class="comment">#交换暂存缓冲区和模式空间的内容</span></span><br><span class="line">y	<span class="comment">#将字符转换成另外一个字符</span></span><br><span class="line"></span><br><span class="line">例:</span><br><span class="line">sed ‘3,<span class="variable">$d</span>’ file		<span class="comment">#删除从第3行到最后一行的内容。</span></span><br><span class="line">sed ‘<span class="variable">$d</span>’ file		<span class="comment">#删除最后一行的内容</span></span><br><span class="line">sed ‘/abc/d’		<span class="comment">#删除包含abc的行。</span></span><br><span class="line">sed ‘3d’ file		<span class="comment">#删除第三行的内容</span></span><br><span class="line">sed  ‘s/abc/def/g’ file		<span class="comment">#把行内的所有abc替换成def，如果没有g,则只替换行内的第一个abc</span></span><br><span class="line">sed  -n ‘s/abc/def/p’ file	<span class="comment">#只打印发生替换的那些行</span></span><br><span class="line">sed  ‘s/abc/&amp;def/’ file		<span class="comment">#在所有的abc后面添加def（&amp;表示匹配的内容）</span></span><br><span class="line">sed  -n ‘s/abc/def/gp’ file	<span class="comment">#把所有的abc替换成def，并打印发生替换的那些行</span></span><br><span class="line">sed  ‘s<span class="comment">#abc#def#g’ file		#把所有的abc替换成def，跟在替换s后面的字符就是查找串和替换串之间的分割字符，本例中试#</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>sort命令</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">sort[Options] [String]:串联排序所有指定文件并将结果写到标准输出(排序)</span><br><span class="line">-b	<span class="comment">#忽略前导的空白区域</span></span><br><span class="line">-d	<span class="comment">#只考虑空白区域和字母字符</span></span><br><span class="line">-f	<span class="comment">#忽略字母大小写</span></span><br><span class="line">-g	<span class="comment">#按照常规数值排序</span></span><br><span class="line">-i	<span class="comment">#只排序可打印字符</span></span><br><span class="line">-n	<span class="comment">#根据字符串数值比较</span></span><br><span class="line">-r	<span class="comment">#逆序输出排序结果</span></span><br><span class="line">-c	<span class="comment">#检查输入是否已排序，若已有序则不进行操作</span></span><br><span class="line">-k	<span class="comment">#位置1[,位置2] 在位置1 开始一个key，在位置2 终止(默认为行尾)</span></span><br><span class="line">-m	<span class="comment">#合并已排序的文件，不再进行排序</span></span><br><span class="line">-o	<span class="comment">#文件 将结果写入到文件而非标准输出</span></span><br><span class="line">-t	<span class="comment">#分隔符 使用指定的分隔符代替非空格到空格的转换</span></span><br><span class="line">-u	<span class="comment">#配合-c，严格校验排序；不配合-c，则只输出一次排序结果</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>awk命令</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">awk [options] <span class="string">'commands'</span> files:行中的每个字符串定义为一个域(段)，域和域之间使用分割符分割</span><br><span class="line"><span class="variable">$0</span>			<span class="comment">#当前记录（作为单个变量）</span></span><br><span class="line"><span class="variable">$1</span>~<span class="variable">$n</span>		<span class="comment">#当前记录的第n个字段，字段间由FS分隔  </span></span><br><span class="line">FS			<span class="comment">#输入字段分隔符 默认是空格  </span></span><br><span class="line">NF			<span class="comment">#当前记录中的字段个数，就是有多少列  </span></span><br><span class="line">NR			<span class="comment">#已经读出的记录数，就是行号，从1开始  </span></span><br><span class="line">RS			<span class="comment">#输入的记录他隔符默 认为换行符  </span></span><br><span class="line">OFS			<span class="comment">#输出字段分隔符 默认也是空格  </span></span><br><span class="line">ORS			<span class="comment">#输出的记录分隔符，默认为换行符  </span></span><br><span class="line">ARGC 		<span class="comment">#命令行参数个数  </span></span><br><span class="line">ARGV		<span class="comment">#命令行参数数组  </span></span><br><span class="line">FILENAME	<span class="comment">#当前输入文件的名字  </span></span><br><span class="line">IGNORECASE	<span class="comment">#如果为真，则进行忽略大小写的匹配  </span></span><br><span class="line">ARGIND		<span class="comment">#当前被处理文件的ARGV标志符  </span></span><br><span class="line">CONVFMT		<span class="comment">#数字转换格式 %.6g  </span></span><br><span class="line">ENVIRON		<span class="comment">#UNIX环境变量  </span></span><br><span class="line">ERRNO		<span class="comment">#UNIX系统错误消息  </span></span><br><span class="line">FIELDWIDTHS	<span class="comment">#输入字段宽度的空白分隔字符串  </span></span><br><span class="line">FNR			<span class="comment">#当前记录数  </span></span><br><span class="line">OFMT		<span class="comment">#数字的输出格式 %.6g  </span></span><br><span class="line">RSTART		<span class="comment">#被匹配函数匹配的字符串首  </span></span><br><span class="line">RLENGTH		<span class="comment">#被匹配函数匹配的字符串长度</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>uniq命令</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">uniq [Options] [String]:用于报告或忽略文件中的重复行</span><br><span class="line">-c	<span class="comment">#在每列旁边显示该行重复出现的次数；</span></span><br><span class="line">-d	<span class="comment">#仅显示重复出现的行列</span></span><br><span class="line">-f	<span class="comment">#忽略比较指定的栏位</span></span><br><span class="line">-s	<span class="comment">#忽略比较指定的字符</span></span><br><span class="line">-u	<span class="comment">#仅显示出一次的行列</span></span><br><span class="line">-w	<span class="comment">#指定要比较的字符</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/shell/" rel="tag"># shell</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/24/shadowsocksR搭建重要命令和配置/" rel="next" title="ssr搭建">
+                <i class="fa fa-chevron-left"></i> ssr搭建
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/24/shell编程( 一 )/" rel="prev" title="Linux Shell 编程基础 ( 一 )">
+                Linux Shell 编程基础 ( 一 ) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">APP</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">APP</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

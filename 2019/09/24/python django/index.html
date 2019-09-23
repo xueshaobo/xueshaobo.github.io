@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="python,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="django实现简单的资产管理平台标签：python  自学python有一段时间了，难得有时间自己写了一个简单的资产管理平台.用AdminLTE做为前端页面django做为后台采用paramkio模块连接服务器并从服务器中提取数据。下面贴出链接建议用Google浏览器访问租的服务器比较便宜又是美国的节点所以比较卡。直达链接开发环境centos 7python 2.7django 1.11.8 登">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python django">
+<meta property="og:url" content="http://yoursite.com/2019/09/24/python django/index.html">
+<meta property="og:site_name" content="APP">
+<meta property="og:description" content="django实现简单的资产管理平台标签：python  自学python有一段时间了，难得有时间自己写了一个简单的资产管理平台.用AdminLTE做为前端页面django做为后台采用paramkio模块连接服务器并从服务器中提取数据。下面贴出链接建议用Google浏览器访问租的服务器比较便宜又是美国的节点所以比较卡。直达链接开发环境centos 7python 2.7django 1.11.8 登">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://raw.githubusercontent.com/xueshaobo/images/master/APP/login.PNG">
+<meta property="og:image" content="https://raw.githubusercontent.com/xueshaobo/images/master/APP/index.PNG">
+<meta property="og:image" content="https://raw.githubusercontent.com/xueshaobo/images/master/APP/index1.PNG">
+<meta property="og:image" content="https://raw.githubusercontent.com/xueshaobo/images/master/APP/index2.PNG">
+<meta property="og:image" content="https://raw.githubusercontent.com/xueshaobo/images/master/APP/index2-1.PNG">
+<meta property="og:image" content="https://raw.githubusercontent.com/xueshaobo/images/master/APP/index1-2.PNG">
+<meta property="og:image" content="https://raw.githubusercontent.com/xueshaobo/images/master/APP/index3.PNG">
+<meta property="og:updated_time" content="2018-09-10T15:52:03.012Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python django">
+<meta name="twitter:description" content="django实现简单的资产管理平台标签：python  自学python有一段时间了，难得有时间自己写了一个简单的资产管理平台.用AdminLTE做为前端页面django做为后台采用paramkio模块连接服务器并从服务器中提取数据。下面贴出链接建议用Google浏览器访问租的服务器比较便宜又是美国的节点所以比较卡。直达链接开发环境centos 7python 2.7django 1.11.8 登">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/xueshaobo/images/master/APP/login.PNG">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/09/24/python django/">
+
+
+
+
+
+  <title>python django | APP</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">APP</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">剑未佩妥出门已是江湖，千帆过尽归来仍是少年</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/24/python django/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="APP">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="APP">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python django</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-24T00:44:36+08:00">
+                2019-09-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="django实现简单的资产管理平台"><a href="#django实现简单的资产管理平台" class="headerlink" title="django实现简单的资产管理平台"></a>django实现简单的资产管理平台</h1><p>标签：python</p>
+<hr>
+<p>自学python有一段时间了，难得有时间自己写了一个简单的资产管理平台.用AdminLTE做为前端页面django做为后台采用paramkio模块连接服务器并从服务器中提取数据。下面贴出链接建议用Google浏览器访问租的服务器比较便宜又是美国的节点所以比较卡。<a href="http://107.174.128.175:8000" target="_blank" rel="noopener">直达链接</a><br><strong>开发环境</strong><br>centos 7<br>python 2.7<br>django 1.11.8</p>
+<p><strong>登陆模块</strong><br><img src="https://raw.githubusercontent.com/xueshaobo/images/master/APP/login.PNG" alt="Image text"><br><strong>部分代码</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">def login(request):</span><br><span class="line">     <span class="keyword">if</span> request.session.get(<span class="string">'is_login'</span>,None):</span><br><span class="line">        <span class="built_in">return</span> redirect(<span class="string">'/index/'</span>)</span><br><span class="line">     <span class="keyword">if</span> request.method == <span class="string">"POST"</span>:</span><br><span class="line">        username = request.POST.get(<span class="string">'username'</span>)</span><br><span class="line">        password = request.POST.get(<span class="string">'password'</span>)</span><br><span class="line">        <span class="keyword">if</span> username and password:</span><br><span class="line">            try:</span><br><span class="line"><span class="comment">#                 p = user.objects.get(name = u).password</span></span><br><span class="line">                user = models.user.objects.get(name = username)</span><br><span class="line">            except:</span><br><span class="line">                <span class="built_in">return</span> render(request,<span class="string">'login.html'</span>)</span><br><span class="line">            <span class="keyword">if</span> password == user.password:</span><br><span class="line">                request.session[<span class="string">'is_login'</span>] = True</span><br><span class="line">                request.session[<span class="string">'user_id'</span>] = user.id</span><br><span class="line">                request.session[<span class="string">'user_name'</span>] = user.name</span><br><span class="line">                <span class="built_in">return</span> redirect(<span class="string">'/index/'</span>)</span><br><span class="line">     <span class="built_in">return</span> render(request, <span class="string">'login.html'</span>)</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+<p>对登陆做出限制写一个限制登陆访问的装饰器</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">def my_login(func):</span><br><span class="line">    def check_login(request):</span><br><span class="line">       <span class="keyword">if</span> request.session.has_key(<span class="string">'user_id'</span>):</span><br><span class="line">          <span class="built_in">return</span> func(request)</span><br><span class="line">       <span class="keyword">else</span>:</span><br><span class="line">          <span class="built_in">return</span> redirect(<span class="string">'/login/'</span>)</span><br><span class="line">    <span class="built_in">return</span> check_login</span><br></pre></td></tr></table></figure>
+
+<p><strong>资产总览</strong><br><img src="https://raw.githubusercontent.com/xueshaobo/images/master/APP/index.PNG" alt="Image text"><br>图形用的是开源的echarjs贴出<br><strong>部分代码</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@my_login</span><br><span class="line">def index(request):</span><br><span class="line">    dev = models.device.objects.all()</span><br><span class="line">    on = models.device.objects.filter(state=<span class="string">'True'</span>).count()</span><br><span class="line">    off = models.device.objects.filter(state=<span class="string">'False'</span>).count()</span><br><span class="line">    on_dev = int(on)</span><br><span class="line">    off_dev = int(off)</span><br><span class="line">    <span class="built_in">return</span> render(request, <span class="string">'index.html'</span>,locals())</span><br></pre></td></tr></table></figure>
+
+<p><strong>站点连接</strong><br><img src="https://raw.githubusercontent.com/xueshaobo/images/master/APP/index1.PNG" alt="Image text"><br>方面添加连接一键直达<br><strong>部分代码</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">def index1(request):</span><br><span class="line">    linklist =models.link.objects.all()</span><br><span class="line">    <span class="built_in">return</span> render(request, <span class="string">'index1.html'</span>,&#123;<span class="string">"link"</span>:linklist&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>资产管理</strong><br><img src="https://raw.githubusercontent.com/xueshaobo/images/master/APP/index2.PNG" alt="Image text"><br><img src="https://raw.githubusercontent.com/xueshaobo/images/master/APP/index2-1.PNG" alt="Image text"><br><img src="https://raw.githubusercontent.com/xueshaobo/images/master/APP/index1-2.PNG" alt="Image text"><br>有基本的增删该查的功能，用了paramiko模块远程ssh提取数据速度不是很理想，后期可以用ajax做异步处理，或是考虑用salt或是agent。<br><strong>部分代码</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">@my_login</span><br><span class="line">def index2(request):</span><br><span class="line"><span class="comment">#    dev = models.device.objects.all()</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#    for i in dev:</span></span><br><span class="line"><span class="comment">#        link = sshv1.sshlink(i.ip,i.port,i.uname,i.password)</span></span><br><span class="line"><span class="comment">#        up = models.device.objects.get(ip=i.ip)</span></span><br><span class="line"><span class="comment">#        up.state = link</span></span><br><span class="line"><span class="comment">#        up.save()</span></span><br><span class="line"></span><br><span class="line">    devlist = models.device.objects.all()</span><br><span class="line"></span><br><span class="line">    <span class="built_in">return</span> render(request, <span class="string">'index2.html'</span>,&#123;<span class="string">"dev"</span>:devlist&#125;)</span><br><span class="line"></span><br><span class="line">def add_dev(request):</span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">"POST"</span>:</span><br><span class="line">        add_hname = request.POST.get(<span class="string">'hname'</span>)</span><br><span class="line">        add_ip = request.POST.get(<span class="string">'ip'</span>)</span><br><span class="line">        add_uname = request.POST.get(<span class="string">'uname'</span>)</span><br><span class="line">        add_pwd = request.POST.get(<span class="string">'password'</span>)</span><br><span class="line">        add_port = request.POST.get(<span class="string">'port'</span>)</span><br><span class="line">        add_position = request.POST.get(<span class="string">'position'</span>)</span><br><span class="line">        add_remarks = request.POST.get(<span class="string">'remarks'</span>)</span><br><span class="line">        port = int(add_port)</span><br><span class="line">        add_state = sshv1.sshlink(add_ip,port,add_uname,add_pwd)</span><br><span class="line">        add=models.device.objects.create(hname=add_hname,ip=add_ip,protoclo=<span class="string">"SSH"</span>,uname=add_uname,password=add_pwd,port=add_port,$</span><br><span class="line"></span><br><span class="line">        <span class="built_in">return</span> redirect(<span class="string">'/index2/'</span>)</span><br><span class="line"></span><br><span class="line">def edit_dev(request):</span><br><span class="line">     <span class="keyword">if</span> request.method == <span class="string">"POST"</span>:</span><br><span class="line">         up_id = request.POST.get(<span class="string">'id'</span>)</span><br><span class="line">         up_hname = request.POST.get(<span class="string">'hname'</span>)</span><br><span class="line">         up_ip = request.POST.get(<span class="string">'ip'</span>)</span><br><span class="line">         up_uname = request.POST.get(<span class="string">'uname'</span>)</span><br><span class="line">         up_pwd = request.POST.get(<span class="string">'password'</span>)</span><br><span class="line">         up_port = request.POST.get(<span class="string">'port'</span>)</span><br><span class="line">         up_position = request.POST.get(<span class="string">'position'</span>)</span><br><span class="line">         up_remarks = request.POST.get(<span class="string">'remarks'</span>)</span><br><span class="line">		 port = int(up_port)</span><br><span class="line">         up_state = sshv1.sshlink(up_ip,port,up_uname,up_pwd)</span><br><span class="line">         up = models.device.objects.get(id=up_id)</span><br><span class="line">         up.hname = up_hname</span><br><span class="line">         up.ip = up_ip</span><br><span class="line">         up.uname = up_uname</span><br><span class="line">         up.password = up_pwd</span><br><span class="line">         up.port = up_port</span><br><span class="line">         up.position = up_position</span><br><span class="line">         up.remarks = up_remarks</span><br><span class="line">         up.save()</span><br><span class="line">         <span class="built_in">return</span> redirect(<span class="string">'/index2/'</span>)</span><br><span class="line"></span><br><span class="line">def del_dev(request):</span><br><span class="line">    try:</span><br><span class="line">        idlist = request.GET[<span class="string">'id'</span>]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> idlist.split(<span class="string">','</span>):</span><br><span class="line">            info = models.device.objects.get(id=i).delete()</span><br><span class="line">            <span class="built_in">return</span> redirect(<span class="string">'/index2/'</span>)</span><br><span class="line">    except:</span><br><span class="line">        <span class="built_in">return</span> redirect(<span class="string">'/index2/'</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>用户管理</strong><br><img src="https://raw.githubusercontent.com/xueshaobo/images/master/APP/index3.PNG" alt="Image text"><br>也是基本增删改功能，后期可以添加组实现资产权限管理<br><strong>部分代码</strong><br>与上面代码基本一致，在此不贴出。</p>
+<p><strong>服务器发布</strong><br>建议采用django+uwsgi+nginx<br><strong>uwsgi配置</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install uwsgi <span class="comment">#环境安装</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#新建uwsgi.ini文件</span></span><br><span class="line">[uwsgi]</span><br><span class="line"><span class="built_in">chdir</span>=/root/myapp/</span><br><span class="line">module=myapp.wsgi:application</span><br><span class="line">socket=/root/main/uwsgi.sock</span><br><span class="line">workers=5</span><br><span class="line">pidfile=/root/main/uwsgi.pid</span><br><span class="line">http=192.168.0.105:8000</span><br><span class="line">static-map=/static=/root/myapp/static</span><br><span class="line">uid=root</span><br><span class="line">gid=root</span><br><span class="line">master=<span class="literal">true</span></span><br><span class="line">vacuum=<span class="literal">true</span></span><br><span class="line">thunder-lock=<span class="literal">true</span></span><br><span class="line"><span class="built_in">enable</span>-threads=<span class="literal">true</span></span><br><span class="line">harakiri=30</span><br><span class="line">post-buffering=4096</span><br><span class="line">daemonize=/root/main/uwsgi.log</span><br><span class="line">buffer-size =65535</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/uwsgi --ini uwsgi.ini</span><br></pre></td></tr></table></figure>
+
+<p><strong>nginx配置</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install epel-release <span class="comment">#环境安装</span></span><br><span class="line">yum install nginx</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#nginx.conf添加一个server</span></span><br><span class="line">server &#123;</span><br><span class="line">	listen 80;</span><br><span class="line">        server_name 192.168.0.105 ;</span><br><span class="line">        access_log /var/<span class="built_in">log</span>/nginx/access.log main;</span><br><span class="line">        charset utf-8;</span><br><span class="line">        gzip_types text/plain application/x-javascript text/css text/javascript application/x-httpd-php application/json text/json$</span><br><span class="line"></span><br><span class="line">        error_page 404 /404.html;</span><br><span class="line">        error_page 500 502 503 504 /50x.html;</span><br><span class="line"></span><br><span class="line">        location / &#123;</span><br><span class="line">        include uwsgi_params;</span><br><span class="line">        uwsgi_connect_timeout 30;</span><br><span class="line">        uwsgi_pass unix:/root/main/uwsgi.sock;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	location /static/ &#123;</span><br><span class="line">        <span class="built_in">alias</span> /root/myapp/static/;</span><br><span class="line">        index index.html index.htm;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/24/mysql主从同步读写分离/" rel="next" title="mysql主从同步">
+                <i class="fa fa-chevron-left"></i> mysql主从同步
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/24/shadowsocksR搭建重要命令和配置/" rel="prev" title="ssr搭建">
+                ssr搭建 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">APP</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#django实现简单的资产管理平台"><span class="nav-number">1.</span> <span class="nav-text">django实现简单的资产管理平台</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">APP</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
