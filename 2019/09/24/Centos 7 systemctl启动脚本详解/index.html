@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="centos,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Centos 7 systemctl启动脚本详解标签:centos环境介绍 centos 7 /usr/lib/systemd/system   # 系统服务，开机不需要登录就能运行的程序（相当于开机自启） /usr/lib/systemd/user       # 用户服务，需要登录后才能运行的程序  示例123456789101112131415161718192021vim /usr/lib">
+<meta name="keywords" content="centos">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Centos 7 systemctl启动脚本详解">
+<meta property="og:url" content="http://yoursite.com/2019/09/24/Centos 7 systemctl启动脚本详解/index.html">
+<meta property="og:site_name" content="APP">
+<meta property="og:description" content="Centos 7 systemctl启动脚本详解标签:centos环境介绍 centos 7 /usr/lib/systemd/system   # 系统服务，开机不需要登录就能运行的程序（相当于开机自启） /usr/lib/systemd/user       # 用户服务，需要登录后才能运行的程序  示例123456789101112131415161718192021vim /usr/lib">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-09-24T12:07:34.367Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Centos 7 systemctl启动脚本详解">
+<meta name="twitter:description" content="Centos 7 systemctl启动脚本详解标签:centos环境介绍 centos 7 /usr/lib/systemd/system   # 系统服务，开机不需要登录就能运行的程序（相当于开机自启） /usr/lib/systemd/user       # 用户服务，需要登录后才能运行的程序  示例123456789101112131415161718192021vim /usr/lib">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/09/24/Centos 7 systemctl启动脚本详解/">
+
+
+
+
+
+  <title>Centos 7 systemctl启动脚本详解 | APP</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">APP</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">剑未佩妥出门已是江湖，千帆过尽归来仍是少年</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/24/Centos 7 systemctl启动脚本详解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="APP">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="APP">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Centos 7 systemctl启动脚本详解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-24T20:06:20+08:00">
+                2019-09-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/centos/" itemprop="url" rel="index">
+                    <span itemprop="name">centos</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Centos-7-systemctl启动脚本详解"><a href="#Centos-7-systemctl启动脚本详解" class="headerlink" title="Centos 7 systemctl启动脚本详解"></a>Centos 7 systemctl启动脚本详解</h1><h2 id="标签-centos"><a href="#标签-centos" class="headerlink" title="标签:centos"></a>标签:centos</h2><h2 id="环境介绍"><a href="#环境介绍" class="headerlink" title="环境介绍"></a>环境介绍</h2><ul>
+<li>centos 7</li>
+<li>/usr/lib/systemd/system   # 系统服务，开机不需要登录就能运行的程序（相当于开机自启）</li>
+<li>/usr/lib/systemd/user       # 用户服务，需要登录后才能运行的程序</li>
+</ul>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">vim /usr/lib/systemd/system/xxx.service </span><br><span class="line">[Unit]   <span class="comment"># 主要是服务说明</span></span><br><span class="line">Description=<span class="built_in">test</span>   <span class="comment"># 简单描述服务</span></span><br><span class="line">After=network.target    <span class="comment"># 描述服务类别，表示本服务需要在network服务启动后在启动</span></span><br><span class="line">Before=xxx.service      <span class="comment"># 表示需要在某些服务启动之前启动，After和Before字段只涉及启动顺序，不涉及依赖关系。</span></span><br><span class="line"></span><br><span class="line">[Service]  <span class="comment"># 核心区域</span></span><br><span class="line">Type=forking     <span class="comment"># 表示后台运行模式。</span></span><br><span class="line">User=user        <span class="comment"># 设置服务运行的用户</span></span><br><span class="line">Group=user       <span class="comment"># 设置服务运行的用户组</span></span><br><span class="line">KillMode=control-group   <span class="comment"># 定义systemd如何停止服务</span></span><br><span class="line">PIDFile=/usr/<span class="built_in">local</span>/<span class="built_in">test</span>/test.pid    <span class="comment"># 存放PID的绝对路径</span></span><br><span class="line">Restart=no        <span class="comment"># 定义服务进程退出后，systemd的重启方式，默认是不重启</span></span><br><span class="line">ExecStart=/usr/<span class="built_in">local</span>/<span class="built_in">test</span>/bin/startup.sh    <span class="comment"># 服务启动命令，命令需要绝对路径</span></span><br><span class="line">ExecReload=/usr/<span class="built_in">local</span>/<span class="built_in">test</span>/bin/startup.sh   <span class="comment">#服务重启命令</span></span><br><span class="line">ExecStop=/usr/<span class="built_in">local</span>/<span class="built_in">test</span>/bin/startup.sh     <span class="comment">#服务关闭命令</span></span><br><span class="line">PrivateTmp=<span class="literal">true</span>                               <span class="comment"># 表示给服务分配独立的临时空间</span></span><br><span class="line">config.file/usr/<span class="built_in">local</span>/xxxx.conf <span class="comment">#指定配置文件</span></span><br><span class="line">   </span><br><span class="line">[Install]   </span><br><span class="line">WantedBy=multi-user.target  <span class="comment"># 多用户</span></span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+<h2 id="详细参数"><a href="#详细参数" class="headerlink" title="详细参数"></a>详细参数</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">Type的类型有：</span><br><span class="line">    simple(默认）：<span class="comment"># 以ExecStart字段启动的进程为主进程</span></span><br><span class="line">    forking:  <span class="comment"># ExecStart字段以fork()方式启动，此时父进程将退出，子进程将成为主进程（后台运行）。一般都设置为forking</span></span><br><span class="line">    oneshot:  <span class="comment"># 类似于simple，但只执行一次，systemd会等它执行完，才启动其他服务</span></span><br><span class="line">    dbus：    <span class="comment"># 类似于simple, 但会等待D-Bus信号后启动</span></span><br><span class="line">    notify:   <span class="comment"># 类似于simple, 启动结束后会发出通知信号，然后systemd再启动其他服务</span></span><br><span class="line">    idle：    <span class="comment"># 类似于simple，但是要等到其他任务都执行完，才会启动该服务。</span></span><br><span class="line">KillMode的类型：</span><br><span class="line">    control-group(默认)：<span class="comment"># 当前控制组里的所有子进程，都会被杀掉</span></span><br><span class="line">    process: <span class="comment"># 只杀主进程</span></span><br><span class="line">    mixed:   <span class="comment"># 主进程将收到SIGTERM信号，子进程收到SIGKILL信号</span></span><br><span class="line">    none:    <span class="comment"># 没有进程会被杀掉，只是执行服务的stop命令</span></span><br><span class="line">Restart的类型：</span><br><span class="line">    no(默认值)： <span class="comment"># 退出后无操作</span></span><br><span class="line">    on-success:  <span class="comment"># 只有正常退出时（退出状态码为0）,才会重启</span></span><br><span class="line">    on-failure:  <span class="comment"># 非正常退出时，重启，包括被信号终止和超时等</span></span><br><span class="line">    on-abnormal: <span class="comment"># 只有被信号终止或超时，才会重启</span></span><br><span class="line">    on-abort:    <span class="comment"># 只有在收到没有捕捉到的信号终止时，才会重启</span></span><br><span class="line">    on-watchdog: <span class="comment"># 超时退出时，才会重启</span></span><br><span class="line">    always:      <span class="comment"># 不管什么退出原因，都会重启</span></span><br><span class="line">    <span class="comment"># 对于守护进程，推荐用on-failure</span></span><br><span class="line">RestartSec字段：</span><br><span class="line">    表示systemd重启服务之前，需要等待的秒数：RestartSec: 30 </span><br><span class="line">    </span><br><span class="line">各种Exec*字段：</span><br><span class="line">    ExecStart：    <span class="comment"># 启动服务时执行的命令</span></span><br><span class="line">    ExecReload：   <span class="comment"># 重启服务时执行的命令 </span></span><br><span class="line">    ExecStop：     <span class="comment"># 停止服务时执行的命令 </span></span><br><span class="line">    ExecStartPre： <span class="comment"># 启动服务前执行的命令 </span></span><br><span class="line">    ExecStartPost：<span class="comment"># 启动服务后执行的命令 </span></span><br><span class="line">    ExecStopPost： <span class="comment"># 停止服务后执行的命令</span></span><br><span class="line"></span><br><span class="line">连词号（-）：在所有启动设置之前，添加的变量字段，都可以加上连词号</span><br><span class="line">    表示抑制错误，即发生错误时，不影响其他命令的执行。</span><br><span class="line">    比如`EnviromentFile=-/etc/sysconfig/xxx` 表示即使文件不存在，也不会抛异常</span><br><span class="line">    </span><br><span class="line">WantedBy字段：</span><br><span class="line">    multi-user.target: <span class="comment"># 表示多用户命令行状态，这个设置很重要</span></span><br><span class="line">    graphical.target:  <span class="comment"># 表示图形用户状体，它依赖于multi-user.target</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/centos/" rel="tag"># centos</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/24/ansible基本使用/" rel="next" title="ansible基本使用">
+                <i class="fa fa-chevron-left"></i> ansible基本使用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">APP</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Centos-7-systemctl启动脚本详解"><span class="nav-number">1.</span> <span class="nav-text">Centos 7 systemctl启动脚本详解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#标签-centos"><span class="nav-number">1.1.</span> <span class="nav-text">标签:centos</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#环境介绍"><span class="nav-number">1.2.</span> <span class="nav-text">环境介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#示例"><span class="nav-number">1.3.</span> <span class="nav-text">示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#详细参数"><span class="nav-number">1.4.</span> <span class="nav-text">详细参数</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">APP</span>
+
+  
+</div>
+<!--
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+-->
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

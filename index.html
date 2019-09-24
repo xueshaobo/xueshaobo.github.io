@@ -259,6 +259,157 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/24/Centos 7 systemctl启动脚本详解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="APP">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="APP">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/24/Centos 7 systemctl启动脚本详解/" itemprop="url">Centos 7 systemctl启动脚本详解</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-24T20:06:20+08:00">
+                2019-09-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/centos/" itemprop="url" rel="index">
+                    <span itemprop="name">centos</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Centos-7-systemctl启动脚本详解"><a href="#Centos-7-systemctl启动脚本详解" class="headerlink" title="Centos 7 systemctl启动脚本详解"></a>Centos 7 systemctl启动脚本详解</h1><h2 id="标签-centos"><a href="#标签-centos" class="headerlink" title="标签:centos"></a>标签:centos</h2><h2 id="环境介绍"><a href="#环境介绍" class="headerlink" title="环境介绍"></a>环境介绍</h2><ul>
+<li>centos 7</li>
+<li>/usr/lib/systemd/system   # 系统服务，开机不需要登录就能运行的程序（相当于开机自启）</li>
+<li>/usr/lib/systemd/user       # 用户服务，需要登录后才能运行的程序</li>
+</ul>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">vim /usr/lib/systemd/system/xxx.service </span><br><span class="line">[Unit]   <span class="comment"># 主要是服务说明</span></span><br><span class="line">Description=<span class="built_in">test</span>   <span class="comment"># 简单描述服务</span></span><br><span class="line">After=network.target    <span class="comment"># 描述服务类别，表示本服务需要在network服务启动后在启动</span></span><br><span class="line">Before=xxx.service      <span class="comment"># 表示需要在某些服务启动之前启动，After和Before字段只涉及启动顺序，不涉及依赖关系。</span></span><br><span class="line"></span><br><span class="line">[Service]  <span class="comment"># 核心区域</span></span><br><span class="line">Type=forking     <span class="comment"># 表示后台运行模式。</span></span><br><span class="line">User=user        <span class="comment"># 设置服务运行的用户</span></span><br><span class="line">Group=user       <span class="comment"># 设置服务运行的用户组</span></span><br><span class="line">KillMode=control-group   <span class="comment"># 定义systemd如何停止服务</span></span><br><span class="line">PIDFile=/usr/<span class="built_in">local</span>/<span class="built_in">test</span>/test.pid    <span class="comment"># 存放PID的绝对路径</span></span><br><span class="line">Restart=no        <span class="comment"># 定义服务进程退出后，systemd的重启方式，默认是不重启</span></span><br><span class="line">ExecStart=/usr/<span class="built_in">local</span>/<span class="built_in">test</span>/bin/startup.sh    <span class="comment"># 服务启动命令，命令需要绝对路径</span></span><br><span class="line">ExecReload=/usr/<span class="built_in">local</span>/<span class="built_in">test</span>/bin/startup.sh   <span class="comment">#服务重启命令</span></span><br><span class="line">ExecStop=/usr/<span class="built_in">local</span>/<span class="built_in">test</span>/bin/startup.sh     <span class="comment">#服务关闭命令</span></span><br><span class="line">PrivateTmp=<span class="literal">true</span>                               <span class="comment"># 表示给服务分配独立的临时空间</span></span><br><span class="line">config.file/usr/<span class="built_in">local</span>/xxxx.conf <span class="comment">#指定配置文件</span></span><br><span class="line">   </span><br><span class="line">[Install]   </span><br><span class="line">WantedBy=multi-user.target  <span class="comment"># 多用户</span></span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/09/24/Centos 7 systemctl启动脚本详解/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/24/ansible基本使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1621,163 +1772,13 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/24/Centos 7 install kvm/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="APP">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="APP">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/24/Centos 7 install kvm/" itemprop="url">Centos 7安装KVM</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-24T00:44:36+08:00">
-                2019-09-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/centos/" itemprop="url" rel="index">
-                    <span itemprop="name">centos</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="Centos-7安装KVM"><a href="#Centos-7安装KVM" class="headerlink" title="Centos 7安装KVM"></a>Centos 7安装KVM</h1><h2 id="标签-centos"><a href="#标签-centos" class="headerlink" title="标签:centos"></a>标签:centos</h2><h2 id="背景概述"><a href="#背景概述" class="headerlink" title="背景概述"></a>背景概述</h2><p>虚拟化技术是一种资源管理技术，将计算机的各个实体资源，用抽象的方式呈现。是的物理硬件得到重组获得最大的应用。而KVM的全称为（Kernel-based Virtual Machine），是开源的系统虚拟化模块。支持硬件的完全虚拟化,是目前主流虚拟化技术之一。（云计算和虚拟化是有区别的，云计算是基于互联网相关服务的增加、使用、交付的一种模式，而虚拟化是一种技术。云计算需要使用到虚拟化技术，并不是虚拟化）。</p>
-<h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sed -i <span class="string">'s#=enforcing#=disabled#'</span> /etc/selinux/config</span><br><span class="line">setenforce 0 </span><br><span class="line">systemctl stop firewalld <span class="comment">#关闭防火墙</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install qemu-kvm python-virtinst libvirt libvirt-python virt-manager libguestfs-tools bridge-utils virt-install <span class="comment">#安装需要的环境</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p><code>qemu-kvm</code> 主要的KVM程序包</p>
-</li>
-<li><p><code>python-virtinst</code> 创建虚拟机所需要的命令行工具和程序库</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/09/24/Centos 7 install kvm/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </li></ul></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -1821,7 +1822,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
