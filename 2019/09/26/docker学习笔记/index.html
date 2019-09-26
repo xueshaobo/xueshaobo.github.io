@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="docker,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="docker学习笔记标签:dockerdocker基本命令docker命令大全 dockerfile介绍123456789FROM 指定基础镜像，必须为第一个命令MAINTAINER 维护者信息RUN 构建镜像时执行的命令ADD 将本地文件添加到容器中，tar类型文件会自动解压(网络压缩资源不会被解压)，可以访问网络资源，类似wgetCOPY 功能类似ADD，但是是不会自动解压文件，也不能访问网络">
+<meta name="keywords" content="docker">
+<meta property="og:type" content="article">
+<meta property="og:title" content="docker学习笔记">
+<meta property="og:url" content="http://yoursite.com/2019/09/26/docker学习笔记/index.html">
+<meta property="og:site_name" content="APP">
+<meta property="og:description" content="docker学习笔记标签:dockerdocker基本命令docker命令大全 dockerfile介绍123456789FROM 指定基础镜像，必须为第一个命令MAINTAINER 维护者信息RUN 构建镜像时执行的命令ADD 将本地文件添加到容器中，tar类型文件会自动解压(网络压缩资源不会被解压)，可以访问网络资源，类似wgetCOPY 功能类似ADD，但是是不会自动解压文件，也不能访问网络">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-09-26T14:49:09.634Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="docker学习笔记">
+<meta name="twitter:description" content="docker学习笔记标签:dockerdocker基本命令docker命令大全 dockerfile介绍123456789FROM 指定基础镜像，必须为第一个命令MAINTAINER 维护者信息RUN 构建镜像时执行的命令ADD 将本地文件添加到容器中，tar类型文件会自动解压(网络压缩资源不会被解压)，可以访问网络资源，类似wgetCOPY 功能类似ADD，但是是不会自动解压文件，也不能访问网络">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/09/26/docker学习笔记/">
+
+
+
+
+
+  <title>docker学习笔记 | APP</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">APP</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">剑未佩妥出门已是江湖，千帆过尽归来仍是少年</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/26/docker学习笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="APP">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="APP">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">docker学习笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-26T22:43:37+08:00">
+                2019-09-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/docker/" itemprop="url" rel="index">
+                    <span itemprop="name">docker</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="docker学习笔记"><a href="#docker学习笔记" class="headerlink" title="docker学习笔记"></a>docker学习笔记</h1><h2 id="标签-docker"><a href="#标签-docker" class="headerlink" title="标签:docker"></a>标签:docker</h2><h2 id="docker基本命令"><a href="#docker基本命令" class="headerlink" title="docker基本命令"></a>docker基本命令</h2><p><a href="https://www.runoob.com/docker/docker-command-manual.html" target="_blank" rel="noopener">docker命令大全</a></p>
+<h2 id="dockerfile介绍"><a href="#dockerfile介绍" class="headerlink" title="dockerfile介绍"></a>dockerfile介绍</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">FROM 指定基础镜像，必须为第一个命令</span><br><span class="line">MAINTAINER 维护者信息</span><br><span class="line">RUN 构建镜像时执行的命令</span><br><span class="line">ADD 将本地文件添加到容器中，tar类型文件会自动解压(网络压缩资源不会被解压)，可以访问网络资源，类似wget</span><br><span class="line">COPY 功能类似ADD，但是是不会自动解压文件，也不能访问网络资源</span><br><span class="line">CMD 构建容器后调用，也就是在容器启动时才进行调用</span><br><span class="line">ENTRYPOINT 配置容器，使其可执行化。配合CMD可省去<span class="string">"application"</span>，只使用参数</span><br><span class="line">EXPOSE 指定于外界交互的端口</span><br><span class="line">WORKDIR 工作目录，类似于<span class="built_in">cd</span>命令</span><br></pre></td></tr></table></figure>
+
+<p>例子：基于centos打包php镜像</p>
+<a id="more"></a>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#目录结构</span></span><br><span class="line">[root@localhost php]<span class="comment"># tree</span></span><br><span class="line">.</span><br><span class="line">├── dockerfile</span><br><span class="line">├── php-5.6.40.tar.gz</span><br><span class="line">├── php-fpm.conf</span><br><span class="line">└── php.ini</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">RUN yum install -y wget</span><br><span class="line"> </span><br><span class="line">RUN wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo</span><br><span class="line"></span><br><span class="line">RUN yum install -y gcc-c++ pcre pcre-devel zlib zlib-devel openssl openssl-devel libmcrypt-devel libxml2-devel bzip2 bzip2-devel curl curl-devel libjpeg-devel libpng-devel freetype-devel openldap openldap-deve readline-devel freetype* libjpeg*</span><br><span class="line"></span><br><span class="line">RUN useradd -M -s /sbin/nologin nginx</span><br><span class="line"></span><br><span class="line">WORKDIR /usr/<span class="built_in">local</span>/php-5.6.40</span><br><span class="line"></span><br><span class="line">RUN ./configure --prefix=/usr/<span class="built_in">local</span>/php --with-config-file-path=/usr/<span class="built_in">local</span>/php --<span class="built_in">enable</span>-inline-optimization --<span class="built_in">disable</span>-debug --<span class="built_in">disable</span>-rpath --<span class="built_in">enable</span>-shared --<span class="built_in">enable</span>-opcache --<span class="built_in">enable</span>-fpm --with-fpm-user=nginx --with-fpm-group=nginx --with-mysql=mysqlnd --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd --with-gettext --<span class="built_in">enable</span>-mbstring --with-iconv --with-mcrypt --with-mhash --with-openssl --<span class="built_in">enable</span>-bcmath --<span class="built_in">enable</span>-soap --with-libxml-dir --<span class="built_in">enable</span>-pcntl --<span class="built_in">enable</span>-shmop --<span class="built_in">enable</span>-sysvmsg --<span class="built_in">enable</span>-sysvsem --<span class="built_in">enable</span>-sysvshm --<span class="built_in">enable</span>-sockets --with-curl --with-zlib --<span class="built_in">enable</span>-zip --with-bz2 --<span class="built_in">enable</span>-ftp  --with-png-dir --with-jpeg-dir==/usr/include --with-gd --with-freetype-dir=/usr/include/freetype2 --<span class="built_in">enable</span>-gd-native-ttf &amp;&amp; make &amp;&amp; make install</span><br><span class="line"></span><br><span class="line">ADD php-fpm.conf /usr/<span class="built_in">local</span>/php/etc/</span><br><span class="line"></span><br><span class="line">ADD php.ini /usr/<span class="built_in">local</span>/php/</span><br><span class="line"></span><br><span class="line">CMD [<span class="string">"/usr/local/php/sbin/php-fpm"</span>]</span><br><span class="line"></span><br><span class="line">EXPOSE 9000</span><br><span class="line"><span class="comment">#注意这里虽然镜像生成了但是用docker却起不来，需要加阻塞进程如tail -f之类</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="docker-compose介绍"><a href="#docker-compose介绍" class="headerlink" title="docker-compose介绍"></a>docker-compose介绍</h2><p>基础命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#docker-compose build</span></span><br><span class="line">用来创建或重新创建服务使用的镜像</span><br><span class="line">docker-compose build service_a</span><br><span class="line">创建一个镜像名叫service_a</span><br><span class="line"></span><br><span class="line"><span class="comment">#docker-compose kill</span></span><br><span class="line">用于通过容器发送SIGKILL信号强行停止服务</span><br><span class="line"></span><br><span class="line"><span class="comment">#docker-compose logs</span></span><br><span class="line">显示service的日志信息</span><br><span class="line"></span><br><span class="line"><span class="comment">#docker-compose pause/unpause</span></span><br><span class="line">docker-compose pause   <span class="comment">#暂停服务</span></span><br><span class="line">docker-compose unpause  <span class="comment">#恢复被暂停的服务</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#docker-compose port</span></span><br><span class="line">用于查看服务中的端口与物理机的映射关系</span><br><span class="line">docker-compose port nginx_web 80 </span><br><span class="line">查看服务中80端口映射到物理机上的那个端口</span><br><span class="line"></span><br><span class="line"><span class="comment">#dokcer-compose ps</span></span><br><span class="line">用于显示当前项目下的容器</span><br><span class="line">注意，此命令与docker ps不同作用，此命令会显示停止后的容器（状态为Exited），只征对某个项目。</span><br><span class="line"></span><br><span class="line"><span class="comment">#docker-compose pull</span></span><br><span class="line">用于拉取服务依赖的镜像</span><br><span class="line"></span><br><span class="line"><span class="comment">#docker-compose restart</span></span><br><span class="line">用于重启某个服务中的所有容器</span><br><span class="line"><span class="comment">#docker-compose restart service_name</span></span><br><span class="line">只有正在运行的服务可以使用重启命令，停止的服务是不可以重启</span><br><span class="line"></span><br><span class="line"><span class="comment">#docker-compose rm</span></span><br><span class="line">删除停止的服务（服务里的容器）</span><br><span class="line">-f    <span class="comment">#强制删除</span></span><br><span class="line">-v    <span class="comment">#删除与容器相关的卷（volumes）</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#docker-compose run</span></span><br><span class="line">用于在服务中运行一个一次性的命令。这个命令会新建一个容器，它的配置和srvice的配置相同。</span><br><span class="line">但两者之间还是有两点不同之处</span><br><span class="line">1、run指定的命令会直接覆盖掉service配置中指定的命令</span><br><span class="line">2、run命令启动的容器不会创建在service配置中指定的端口，如果需要指定使用--service-ports指定</span><br><span class="line"></span><br><span class="line"><span class="comment">#docker-compose start/stop</span></span><br><span class="line">docker-compose start 启动运行某个服务的所有容器</span><br><span class="line">docker-compose stop 启动运行某个服务的所有容器</span><br><span class="line"></span><br><span class="line"><span class="comment">#docker-compose scale</span></span><br><span class="line">指定某个服务启动的容器个数</span><br></pre></td></tr></table></figure>
+
+<h3 id="docker-compose-yml语法"><a href="#docker-compose-yml语法" class="headerlink" title="docker-compose.yml语法"></a>docker-compose.yml语法</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">"3"</span> <span class="comment">#指定语法的版本</span></span><br><span class="line"><span class="attr">services:</span>    <span class="comment">#定义服务</span></span><br><span class="line"><span class="attr">  nginx:</span>     <span class="comment">#服务的名称</span></span><br><span class="line"><span class="attr">    container_name:</span> <span class="string">web-nginx</span> <span class="comment">#容器的名称</span></span><br><span class="line"><span class="attr">    hostname:</span> <span class="string">web-nginx</span>       <span class="comment">#主机名称，类似hostname</span></span><br><span class="line"><span class="attr">    image:</span> <span class="attr">nginx:latest</span>       <span class="comment">#镜像</span></span><br><span class="line"><span class="attr">    restart:</span> <span class="string">always</span>           <span class="comment">#总是启动</span></span><br><span class="line"><span class="attr">    ports:</span>                     <span class="comment">#端口映射</span></span><br><span class="line"><span class="bullet">      -</span> <span class="number">80</span><span class="string">:80</span></span><br><span class="line"><span class="attr">    links:</span>                     <span class="comment">#连接容器</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">php-fpm</span></span><br><span class="line"><span class="attr">    depends_on:</span>                <span class="comment">#启动顺序，容器依赖关系</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">php-fpm</span></span><br><span class="line"><span class="attr">    volumes:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">./webserver:/webserver</span>    <span class="comment">#映射本地磁盘</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">./nginx/nginx.conf:/etc/nginx/nginx.conf</span></span><br><span class="line"><span class="attr">  php-fpm:</span></span><br><span class="line"><span class="attr">    container_name:</span> <span class="string">php-fpm</span></span><br><span class="line"><span class="attr">    hostname:</span> <span class="string">php-fpm</span></span><br><span class="line"><span class="attr">    build:</span> <span class="string">./html</span></span><br><span class="line"><span class="attr">    image:</span> <span class="attr">php:v3</span></span><br><span class="line"><span class="attr">    ports:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="number">9000</span><span class="string">:9000</span></span><br><span class="line"><span class="attr">    volumes:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">./webserver:/var/www/html/</span></span><br><span class="line"><span class="comment">#      - ./php-fpm.d/www.conf:/usr/local/etc/php-fpm.d/www.conf</span></span><br><span class="line"><span class="attr">    links:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">mysql</span></span><br><span class="line"><span class="attr">  mysql:</span></span><br><span class="line"><span class="attr">    container_name:</span> <span class="string">mysql</span></span><br><span class="line"><span class="attr">    hostname:</span> <span class="string">mysql</span></span><br><span class="line"><span class="attr">    build:</span> <span class="string">./mysql</span></span><br><span class="line"><span class="attr">    image:</span> <span class="attr">mysql:5.7</span></span><br><span class="line"><span class="attr">    ports:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="number">3306</span><span class="string">:3306</span></span><br><span class="line"><span class="attr">    volumes:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">./mysql/:/var/lib/mysql/</span></span><br><span class="line"><span class="attr">    environment:</span></span><br><span class="line">        <span class="string">MYSQL_ROOT_PASSWORD</span> <span class="string">:</span> <span class="string">root</span> <span class="comment">#初始话密码</span></span><br></pre></td></tr></table></figure>
+
+<p>例子：搭建lnmp环境</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#环境目录</span></span><br><span class="line">[root@localhost opt]<span class="comment"># tree</span></span><br><span class="line">.</span><br><span class="line">├── docker-compose.yml</span><br><span class="line">├── html</span><br><span class="line">├── mysql</span><br><span class="line">├── nginx</span><br><span class="line">│   └── nginx.conf</span><br><span class="line">└── webserver</span><br><span class="line">    └── index.php</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">vim nginx/nginx.conf</span><br><span class="line">user  www-data;</span><br><span class="line">worker_processes  1;</span><br><span class="line">error_log  /var/<span class="built_in">log</span>/nginx/error.log warn;</span><br><span class="line">pid        /var/run/nginx.pid;</span><br><span class="line">events &#123;</span><br><span class="line">    worker_connections  1024;</span><br><span class="line">&#125;</span><br><span class="line">http &#123;</span><br><span class="line">    include       /etc/nginx/mime.types;</span><br><span class="line">    default_type  application/octet-stream;</span><br><span class="line">    log_format  main  <span class="string">'$remote_addr - $remote_user [$time_local] "$request" '</span></span><br><span class="line">                      <span class="string">'$status $body_bytes_sent "$http_referer" '</span></span><br><span class="line">                      <span class="string">'"$http_user_agent" "$http_x_forwarded_for"'</span>;</span><br><span class="line">    access_log  /var/<span class="built_in">log</span>/nginx/access.log  main;</span><br><span class="line">    client_max_body_size 10m;</span><br><span class="line">    sendfile        on;</span><br><span class="line">    <span class="comment">#tcp_nopush     on;</span></span><br><span class="line">    keepalive_timeout  65;</span><br><span class="line">    <span class="comment">#gzip  on;</span></span><br><span class="line"></span><br><span class="line">    server &#123;</span><br><span class="line">        listen       80;</span><br><span class="line">        server_name  127.0.0.1;</span><br><span class="line">        root  /webserver;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        index index.php index.html index.htm;</span><br><span class="line">        location / &#123;</span><br><span class="line">          <span class="keyword">if</span> (!-e <span class="variable">$request_filename</span>) &#123;</span><br><span class="line">              rewrite ^(.*)$ /index.php?s=<span class="variable">$1</span> last;</span><br><span class="line">              <span class="built_in">break</span>;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        location @rewrite &#123;</span><br><span class="line">          rewrite ^/admin.php(.*)$ /admin.php?s=<span class="variable">$1</span> last;</span><br><span class="line">          rewrite ^/index.php(.*)$ /index.php?s=<span class="variable">$1</span> last;</span><br><span class="line">          rewrite . /index.php?s=<span class="variable">$uri</span> last;</span><br><span class="line">        &#125;</span><br><span class="line">        error_page   500 502 503 504  /50x.html;</span><br><span class="line">        location = /50x.html &#123;</span><br><span class="line">            root   html;</span><br><span class="line">        &#125;</span><br><span class="line">        location ~ \.php$ &#123;</span><br><span class="line">            fastcgi_pass   php-fpm:9000;</span><br><span class="line">            fastcgi_index  index.php;</span><br><span class="line">            fastcgi_param  SCRIPT_FILENAME  /var/www/html<span class="variable">$fastcgi_script_name</span>;</span><br><span class="line">            <span class="comment">#这里一定要写的是php容器下web站点的目录，不能$root因为目录不同</span></span><br><span class="line">            include        fastcgi_params;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里安装的是docker hub上原生的php镜像里面许多的扩展模块是没有的，我们需要用dockerfile自定义一个php镜像。参考官方给出的方法</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">vim Dockerfile</span><br><span class="line"></span><br><span class="line">FROM php:7.1-fpm</span><br><span class="line"></span><br><span class="line">RUN apt-get update &amp;&amp; apt-get install -y \</span><br><span class="line">        libfreetype6-dev \</span><br><span class="line">        libjpeg62-turbo-dev \</span><br><span class="line">        libmcrypt-dev \</span><br><span class="line">        libpng-dev \</span><br><span class="line">    &amp;&amp; docker-php-ext-install iconv mcrypt \</span><br><span class="line">    &amp;&amp; docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \</span><br><span class="line">    &amp;&amp; docker-php-ext-install gd mysqli</span><br><span class="line">CMD [<span class="string">"php-fpm"</span>]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t php7.1:v1 . <span class="comment">#镜像名称是php7.1版本是v1,点表示使用当前目录的Dockerfile文件</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="搭建docker私有镜像站"><a href="#搭建docker私有镜像站" class="headerlink" title="搭建docker私有镜像站"></a>搭建docker私有镜像站</h2><p>docker原生的镜像站是registry，感觉界面不是很友好所以我使用了harbor</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/goharbor/harbor/releases <span class="comment">#项目下载地址</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">wget https://storage.googleapis.com/harbor-releases/harbor-offline-installer-v1.6.1.tgz</span><br><span class="line">tar zxvf harbor-offline-installer-v1.6.1.tgz</span><br><span class="line"><span class="built_in">cd</span> harbor</span><br><span class="line">vim harbor.cfg</span><br><span class="line"><span class="comment">#简单的配置一下</span></span><br><span class="line">hostname = 192.168.0.188 <span class="comment">#主机地址</span></span><br><span class="line">harbor_admin_password = Harbor12345 <span class="comment">#harbor登陆密码</span></span><br><span class="line">auth_mode = db_auth <span class="comment">#认证方式</span></span><br><span class="line">self_registration = on <span class="comment">#是否开启自注册</span></span><br><span class="line">token_expiration = 30 <span class="comment">#Token有效时间，默认30分钟</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./install.sh <span class="comment">#自动安装</span></span><br></pre></td></tr></table></figure>
+
+<p>安装完成之后访问<a href="http://192.168.0.188即可访问" target="_blank" rel="noopener">http://192.168.0.188即可访问</a></p>
+<p>添加一个项目名称为test添加一个用户名称为root</p>
+<p>docker默认上传方式是https，所以要修改docker配置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/docker/daemon.json</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line"><span class="string">"insecure-registries"</span>: [</span><br><span class="line"></span><br><span class="line"><span class="string">"192.168.0.188"</span></span><br><span class="line"></span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上传下载docker镜像</p>
+<p>先登陆本地仓库</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker login 192.168.0.188</span><br><span class="line">Username:root</span><br><span class="line">Password：password</span><br></pre></td></tr></table></figure>
+
+<p>再给镜像打上tag</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker tag php:v3 192.168.0.188/<span class="built_in">test</span>/php7.1:v1</span><br></pre></td></tr></table></figure>
+
+<p>然后上传镜像</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker push 192.168.0.188/<span class="built_in">test</span>/php7.1</span><br></pre></td></tr></table></figure>
+
+<p>提示上传成功后就大功告成了</p>
+<h2 id="docker-swarm介绍"><a href="#docker-swarm介绍" class="headerlink" title="docker-swarm介绍"></a>docker-swarm介绍</h2><p>首先准备最少两台虚拟机搭建docker-swarm集群环境</p>
+<table>
+<thead>
+<tr>
+<th>主机名</th>
+<th>主机地址</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>manager</td>
+<td>192.168.0.189</td>
+</tr>
+<tr>
+<td>node1</td>
+<td>192.168.0.198</td>
+</tr>
+</tbody></table>
+<h3 id="初始化两台主机"><a href="#初始化两台主机" class="headerlink" title="初始化两台主机"></a>初始化两台主机</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#192.168.0.189</span></span><br><span class="line">hostname manager &amp;&amp; su</span><br><span class="line">cat &gt;&gt;/etc/hosts&lt;&lt;EOF</span><br><span class="line">192.168.0.189 manager</span><br><span class="line">192.168.0.198 node1</span><br><span class="line">EOF</span><br><span class="line">systemctl stop firewalld</span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld</span><br><span class="line">setenforce 0 </span><br><span class="line">sed -i <span class="string">'s#=enforcing#=disabled#'</span> /etc/selinux/config</span><br><span class="line">yum install -y ntpdate vim net-tools tree wget lrzsz</span><br><span class="line"></span><br><span class="line"><span class="comment">#192.168.0.198</span></span><br><span class="line">hostname node1 &amp;&amp; su</span><br><span class="line">cat &gt;&gt;/etc/hosts&lt;&lt;EOF</span><br><span class="line">192.168.0.189 manager</span><br><span class="line">192.168.0.198 node1</span><br><span class="line">EOF</span><br><span class="line">systemctl stop firewalld</span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld</span><br><span class="line">setenforce 0 </span><br><span class="line">sed -i <span class="string">'s#=enforcing#=disabled#'</span> /etc/selinux/config</span><br><span class="line">yum install -y ntpdate vim net-tools tree wget lrzsz</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置docker"><a href="#配置docker" class="headerlink" title="配置docker"></a>配置docker</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/sysconfig/docker</span><br><span class="line"><span class="comment"># Modify these options if you want to change the way the docker daemon runs</span></span><br><span class="line">OPTIONS=<span class="string">'-H 0.0.0.0:2375 -H unix:///var/run/docker.sock --selinux-enabled --log-driver=journald --signature-verification=false'</span></span><br><span class="line"><span class="comment">#所有节点加上上面标记的部分，开启2375端口</span></span><br><span class="line">systemctl restart docker</span><br></pre></td></tr></table></figure>
+
+<h3 id="部署docker-swarm"><a href="#部署docker-swarm" class="headerlink" title="部署docker-swarm"></a>部署docker-swarm</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">docker pull swarm</span><br><span class="line"><span class="comment">#192.168.0.189</span></span><br><span class="line">docker swarm init --advertise-addr 192.168.0.189</span><br><span class="line"><span class="comment">#记下生成的token值</span></span><br><span class="line"><span class="comment">#192.168.0.198</span></span><br><span class="line">docker swarm join --token SWMTKN-1-32h92m334z80z270d4duqdc3ysl1oyrjmxe1upyyfjyln12xxa-4gm603mczorxgh6751n5q7jya 192.168.0.189:2377</span><br><span class="line"></span><br><span class="line">[root@manager opt]<span class="comment"># docker node ls</span></span><br><span class="line">ID                           HOSTNAME  STATUS  AVAILABILITY  MANAGER STATUS</span><br><span class="line">dqo1ub98e9zassjy0jeb77ghq    node1     Ready   Active        </span><br><span class="line">hhwqqcrvmusfkqqj2zwwkhuvf *  manager   Ready   Active        Leader</span><br></pre></td></tr></table></figure>
+
+<h3 id="swarm的web界面"><a href="#swarm的web界面" class="headerlink" title="swarm的web界面"></a>swarm的web界面</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer</span><br></pre></td></tr></table></figure>
+
+<h3 id="简单的使用案例"><a href="#简单的使用案例" class="headerlink" title="简单的使用案例"></a>简单的使用案例</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">docker network create -d overlay dockernet</span><br><span class="line"><span class="comment">#创建swarm网络</span></span><br><span class="line">[root@manager opt]<span class="comment"># docker network ls</span></span><br><span class="line">NETWORK ID          NAME                 DRIVER              SCOPE</span><br><span class="line">5d0cbf18bc86        bridge               bridge              <span class="built_in">local</span></span><br><span class="line">4b13e47e1fd3        docker_gwbridge      bridge              <span class="built_in">local</span></span><br><span class="line">ef1nk8lmk1dq        dockernet            overlay             swarm</span><br><span class="line">6166f0c2a366        host                 host                <span class="built_in">local</span></span><br><span class="line">qksp3icl2ah3        ingress              overlay             swarm</span><br><span class="line">e9f2f32deeb4        none                 null                <span class="built_in">local</span></span><br><span class="line"><span class="comment">#创建swarm服务</span></span><br><span class="line">docker service create --replicas 1 --network dockernet --name nginx-cluster -p 80:80 nginx</span><br><span class="line"><span class="comment">#--replicas 指定容器数量</span></span><br><span class="line">[root@manager ~]<span class="comment"># docker service ls</span></span><br><span class="line">ID            NAME           MODE        REPLICAS  IMAGE</span><br><span class="line">k7lupo9xu0cn  nginx-cluster  replicated  1/1       nginx:latest</span><br><span class="line"><span class="comment">#在线扩缩容</span></span><br><span class="line">[root@manager ~]<span class="comment"># docker service scale nginx-cluster=5</span></span><br><span class="line">nginx-cluster scaled to 5</span><br><span class="line">[root@manager ~]<span class="comment"># docker service ps nginx-cluster</span></span><br><span class="line">ID            NAME             IMAGE         NODE     DESIRED STATE  CURRENT STATE            ERROR  PORTS</span><br><span class="line">7t7xjpmao533  nginx-cluster.1  nginx:latest  manager  Running        Running 2 hours ago             </span><br><span class="line">vitsgxpdf3bn  nginx-cluster.2  nginx:latest  manager  Running        Running 2 seconds ago           </span><br><span class="line">o9w529mmttsw  nginx-cluster.3  nginx:latest  node1    Running        Preparing 2 seconds ago         </span><br><span class="line">cfz8dkx9p6ih  nginx-cluster.4  nginx:latest  node2    Running        Preparing 2 seconds ago         </span><br><span class="line">9p35iunijoro  nginx-cluster.5  nginx:latest  node2    Running        Preparing 2 seconds ago</span><br></pre></td></tr></table></figure>
+
+<h3 id="结合docker-compose使用"><a href="#结合docker-compose使用" class="headerlink" title="结合docker-compose使用"></a>结合docker-compose使用</h3><p>创建一个简单的docker-compose示例</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">[root@manager opt]<span class="comment"># tree</span></span><br><span class="line">.</span><br><span class="line">├── docker-compose.yml</span><br><span class="line">├── nginx</span><br><span class="line">│   └── nginx.conf</span><br><span class="line">└── webserver</span><br><span class="line">    └── index.html</span><br><span class="line">vim nginx/nginx.conf</span><br><span class="line"><span class="comment">#user  nginx;</span></span><br><span class="line">worker_processes  1;</span><br><span class="line">error_log  /var/<span class="built_in">log</span>/nginx/error.log warn;</span><br><span class="line">pid        /var/run/nginx.pid;</span><br><span class="line">events &#123;</span><br><span class="line">    worker_connections  1024;</span><br><span class="line">&#125;</span><br><span class="line">http &#123;</span><br><span class="line">    include       /etc/nginx/mime.types;</span><br><span class="line">    default_type  application/octet-stream;</span><br><span class="line">    log_format  main  <span class="string">'$remote_addr - $remote_user [$time_local] "$request" '</span></span><br><span class="line">                      <span class="string">'$status $body_bytes_sent "$http_referer" '</span></span><br><span class="line">                      <span class="string">'"$http_user_agent" "$http_x_forwarded_for"'</span>;</span><br><span class="line">    access_log  /var/<span class="built_in">log</span>/nginx/access.log  main;</span><br><span class="line">    client_max_body_size 10m;</span><br><span class="line">    sendfile        on;</span><br><span class="line">    <span class="comment">#tcp_nopush     on;</span></span><br><span class="line">    keepalive_timeout  65;</span><br><span class="line">    <span class="comment">#gzip  on;</span></span><br><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    server_name  localhost;</span><br><span class="line">    location / &#123;</span><br><span class="line">        root   /webserver;</span><br><span class="line">        index  index.html index.htm;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">    include /etc/nginx/conf.d/*.conf;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用docker-swarm启动docker-compose</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#创建</span></span><br><span class="line">docker stack deploy web-server --compose-file=./docker-compose.yml</span><br><span class="line">[root@manager opt]<span class="comment"># docker service ls</span></span><br><span class="line">ID            NAME              MODE        REPLICAS  IMAGE</span><br><span class="line">v9uwpwjk8h0g  web-server_nginx  replicated  1/1       nginx:latest</span><br><span class="line"><span class="comment">#查看</span></span><br><span class="line">[root@manager opt]<span class="comment"># docker service ps web-server_nginx</span></span><br><span class="line">ID            NAME                IMAGE         NODE     DESIRED STATE  CURRENT STATE           ERROR  PORTS</span><br><span class="line">ch4gkom2nb8t  web-server_nginx.1  nginx:latest  manager  Running        Running 56 seconds ago         </span><br><span class="line"><span class="comment">#扩容</span></span><br><span class="line">[root@manager opt]<span class="comment"># docker service scale web-server_nginx=5</span></span><br><span class="line">web-server_nginx scaled to 5</span><br><span class="line">[root@manager opt]<span class="comment"># docker service ps web-server_nginx</span></span><br><span class="line">ID            NAME                IMAGE         NODE     DESIRED STATE  CURRENT STATE        ERROR  PORTS</span><br><span class="line">4b0hn7axdzqh  web-server_nginx.1  nginx:latest  manager  Running        Running 2 hours ago         </span><br><span class="line">mup1rkidzlyn  web-server_nginx.2  nginx:latest  node1    Running        Running 2 hours ago         </span><br><span class="line">yjr879sdfono  web-server_nginx.3  nginx:latest  manager  Running        Running 2 hours ago         </span><br><span class="line">gfeh6kb5bvaa  web-server_nginx.4  nginx:latest  node1    Running        Running 2 hours ago         </span><br><span class="line">axmc55ymw3fa  web-server_nginx.5  nginx:latest  manager  Running        Running 2 hours ago         </span><br><span class="line"><span class="comment">#docker-compose映射了本地硬盘在node节点上要给与相同配置，要不然扩容的容器会全部运行在manager上</span></span><br><span class="line"><span class="comment">#删除</span></span><br><span class="line">[root@manager opt]<span class="comment"># docker service ls</span></span><br><span class="line">ID            NAME              MODE        REPLICAS  IMAGE</span><br><span class="line">v9uwpwjk8h0g  web-server_nginx  replicated  5/5       nginx:latest</span><br><span class="line">[root@manager opt]<span class="comment"># docker service rm web-server_nginx</span></span><br><span class="line">web-server_nginx</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/docker/" rel="tag"># docker</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/24/prometheus + grafana基本配置/" rel="next" title="prometheus + grafana基本配置">
+                <i class="fa fa-chevron-left"></i> prometheus + grafana基本配置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">APP</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#docker学习笔记"><span class="nav-number">1.</span> <span class="nav-text">docker学习笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#标签-docker"><span class="nav-number">1.1.</span> <span class="nav-text">标签:docker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker基本命令"><span class="nav-number">1.2.</span> <span class="nav-text">docker基本命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dockerfile介绍"><span class="nav-number">1.3.</span> <span class="nav-text">dockerfile介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-compose介绍"><span class="nav-number">1.4.</span> <span class="nav-text">docker-compose介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-compose-yml语法"><span class="nav-number">1.4.1.</span> <span class="nav-text">docker-compose.yml语法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建docker私有镜像站"><span class="nav-number">1.5.</span> <span class="nav-text">搭建docker私有镜像站</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-swarm介绍"><span class="nav-number">1.6.</span> <span class="nav-text">docker-swarm介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化两台主机"><span class="nav-number">1.6.1.</span> <span class="nav-text">初始化两台主机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置docker"><span class="nav-number">1.6.2.</span> <span class="nav-text">配置docker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#部署docker-swarm"><span class="nav-number">1.6.3.</span> <span class="nav-text">部署docker-swarm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#swarm的web界面"><span class="nav-number">1.6.4.</span> <span class="nav-text">swarm的web界面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简单的使用案例"><span class="nav-number">1.6.5.</span> <span class="nav-text">简单的使用案例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结合docker-compose使用"><span class="nav-number">1.6.6.</span> <span class="nav-text">结合docker-compose使用</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">APP</span>
+
+  
+</div>
+<!--
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+-->
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
