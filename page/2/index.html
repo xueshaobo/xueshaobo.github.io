@@ -259,6 +259,156 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/24/python django/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="APP">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="APP">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/24/python django/" itemprop="url">python django</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-24T00:44:36+08:00">
+                2019-09-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="django实现简单的资产管理平台"><a href="#django实现简单的资产管理平台" class="headerlink" title="django实现简单的资产管理平台"></a>django实现简单的资产管理平台</h1><p>标签：python</p>
+<hr>
+<p>自学python有一段时间了，难得有时间自己写了一个简单的资产管理平台.用AdminLTE做为前端页面django做为后台采用paramkio模块连接服务器并从服务器中提取数据。<br><strong>开发环境</strong><br>centos 7<br>python 2.7<br>django 1.11.8</p>
+<p><strong>登陆模块</strong><br><img src="https://raw.githubusercontent.com/xueshaobo/images/master/APP/login.PNG" alt="Image text"><br><strong>部分代码</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">def login(request):</span><br><span class="line">     <span class="keyword">if</span> request.session.get(<span class="string">'is_login'</span>,None):</span><br><span class="line">        <span class="built_in">return</span> redirect(<span class="string">'/index/'</span>)</span><br><span class="line">     <span class="keyword">if</span> request.method == <span class="string">"POST"</span>:</span><br><span class="line">        username = request.POST.get(<span class="string">'username'</span>)</span><br><span class="line">        password = request.POST.get(<span class="string">'password'</span>)</span><br><span class="line">        <span class="keyword">if</span> username and password:</span><br><span class="line">            try:</span><br><span class="line"><span class="comment">#                 p = user.objects.get(name = u).password</span></span><br><span class="line">                user = models.user.objects.get(name = username)</span><br><span class="line">            except:</span><br><span class="line">                <span class="built_in">return</span> render(request,<span class="string">'login.html'</span>)</span><br><span class="line">            <span class="keyword">if</span> password == user.password:</span><br><span class="line">                request.session[<span class="string">'is_login'</span>] = True</span><br><span class="line">                request.session[<span class="string">'user_id'</span>] = user.id</span><br><span class="line">                request.session[<span class="string">'user_name'</span>] = user.name</span><br><span class="line">                <span class="built_in">return</span> redirect(<span class="string">'/index/'</span>)</span><br><span class="line">     <span class="built_in">return</span> render(request, <span class="string">'login.html'</span>)</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/09/24/python django/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/24/mysql主从同步读写分离/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -909,7 +1059,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -920,7 +1070,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -931,7 +1081,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
